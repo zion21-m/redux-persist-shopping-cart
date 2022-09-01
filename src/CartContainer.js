@@ -2,7 +2,11 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CartItem from "./CartItem";
 import { MDBBtn, MDBIcon } from "mdb-react-ui-kit";
-import { clearCart, getCartTotal } from "./redux/features/cartSlice";
+import {
+  clearCart,
+  getCartItems,
+  getCartTotal,
+} from "./redux/features/cartSlice";
 
 const CartContainer = () => {
   const { items, totalAmount } = useSelector((state) => state.cart);
@@ -10,6 +14,20 @@ const CartContainer = () => {
   useEffect(() => {
     dispatch(getCartTotal());
   }, [items]);
+  if (items.length === 0) {
+    return (
+      <>
+        <h3 className="fs-bold mt-4">
+          Your shopping{" "}
+          <span>
+            <MDBIcon fas icon="shopping-bag"></MDBIcon>
+          </span>{" "}
+          is empty
+        </h3>
+        <MDBBtn onClick={() => dispatch(getCartItems())}>Get Items back</MDBBtn>
+      </>
+    );
+  }
   return (
     <>
       <h2 className="lead-mb-0 mt-2">Your shopping cart</h2>
