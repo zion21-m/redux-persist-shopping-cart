@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { MDBBtn, MDBIcon } from "mdb-react-ui-kit";
-import { decrease, increase } from "./redux/features/cartSlice";
+import { decrease, increase, remove } from "./redux/features/cartSlice";
 
 const CartItem = ({ img, id, title, price, amount }) => {
   const dispatch = useDispatch();
@@ -23,6 +23,7 @@ const CartItem = ({ img, id, title, price, amount }) => {
             fas
             icon="trash"
             style={{ cursor: "pointer", color: "red" }}
+            onClick={() => dispatch(remove(id))}
           />
         </div>
         <div className="col-sm-8">
